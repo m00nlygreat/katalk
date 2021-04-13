@@ -1,12 +1,12 @@
 import csv
 from operator import itemgetter, attrgetter
 
-c = open('e.csv','r')
+c = open('e.csv','r', encoding='utf-8-sig')
 rc = list(enumerate(csv.reader(c)))
+wc = csv.writer(open('rate.csv', 'w', encoding='utf-8-sig', newline=''))
 lines = []
 result = []
 
-wc = csv.writer(open('rate.csv', 'w'))
 
 speakers = []
 
