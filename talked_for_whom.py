@@ -1,17 +1,16 @@
 import csv
 from operator import itemgetter, attrgetter
 
-c = open('e.csv','r', encoding='utf-8-sig')
-rank = csv.reader(open('rate.csv', 'r', encoding='utf-8-sig'))
+c = open('e.csv','r', encoding='utf-8')
 
 wc = csv.writer(open('result.csv', 'w', newline='', encoding='utf-8-sig'))
 
 rc = list(enumerate(csv.reader(c)))
+
 lines = []
 result = []
 
-who = '한조외길#3406.34남'
-
+who = 'GLAMOUR#31767 32 여'
 
 for line in rc:
     if line[1][2] == who:      
