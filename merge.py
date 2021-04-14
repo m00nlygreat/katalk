@@ -3,6 +3,8 @@ import re
 
 file_path = './src'
 file_list = list(sorted(os.listdir(file_path)))
+
+# macOS 에서 자동생성하는 파일을 무시
 if '.DS_Store' in file_list:
     file_list.remove('.DS_Store')
 

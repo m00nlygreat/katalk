@@ -1,7 +1,7 @@
 import csv
 from operator import itemgetter, attrgetter
 
-c = open('e.csv','r', encoding='utf-8')
+c = open('conversation.csv','r', encoding='utf-8')
 
 wc = csv.writer(open('result.csv', 'w', newline='', encoding='utf-8-sig'))
 
@@ -10,7 +10,7 @@ rc = list(enumerate(csv.reader(c)))
 lines = []
 result = []
 
-who = 'GLAMOUR#31767 32 여'
+who = '문형'
 
 for line in rc:
     if line[1][2] == who:      

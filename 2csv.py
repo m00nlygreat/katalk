@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 file = './combined.txt'
 
 txt = open(file, 'r', encoding='utf-8-sig')
-w = open('e.csv','w', newline='' ,encoding='utf-8-sig')
+w = open('conversation.csv','w', newline='' ,encoding='utf-8-sig')
 wr = csv.writer(w)
 
 message_pattern = '^(\d{4}. \d{1,2}. \d{1,2}). (\d{2}:\d{2}), (.+?(?=\s:\s))\s:\s(.+)$'

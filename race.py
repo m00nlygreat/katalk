@@ -5,7 +5,7 @@ import bar_chart_race as bcr
 
 # DataFrame 준비 
 
-data = (pd.read_csv('e.csv', parse_dates=['date'])).set_index(['date'])
+data = (pd.read_csv('conversation.csv', parse_dates=['date'])).set_index(['date'])
 dates = sorted(set(data.index))
 people = set(data['person'])
 
@@ -19,16 +19,16 @@ for person in people:
         days.append(day_count)
     period = 30
 
-    sml_than_month = np.cumsum(days[:period])
-    big_than_month = []
+    sml_than_period = np.cumsum(days[:period])
+    big_than_period = []
 
     for i in range(1,len(days)+1):
         if i <= period:
             continue
         else:
-            big_than_month.append(np.sum(days[i-period:i]))
+            big_than_period.append(np.sum(days[i-period:i]))
     
-    person_data = np.append(sml_than_month, big_than_month)
+    person_data = np.append(sml_than_period, big_than_period)
 
     
         # day_count = np.count_nonzero((data.loc[date,['person']]).values == person)
@@ -46,7 +46,7 @@ for person in people:
 
 print(chart)
 chart.to_csv('dailyTMI.csv')
-title = '퇴근후 오버워치 2018.12 ~ 2021.4'
+title = '제목 적기'
 
 
 # bar_chart_race 그리기
@@ -67,7 +67,7 @@ bcr.bar_chart_race(
     period_label={'x': .99, 'y': .25, 'ha': 'right', 'va': 'center'},
     period_fmt='%B %d, %Y',
     period_summary_func=lambda v, r: {'x': .99, 'y': .18,
-                                      's': f'Total msgs: {v.nlargest(6).sum():,.0f}',
+                                      's': f'msgs by period: {v.nlargest(6).sum():,.0f}',
                                       'ha': 'right', 'size': 8, 'family': 'Courier New'},
     perpendicular_bar_func='median',
     period_length=500,
@@ -83,4 +83,4 @@ bcr.bar_chart_race(
     writer=None,
     fig=None,
     bar_kwargs={'alpha': .7},
-    filter_column_colors=False)  
+    filter_column_colors=True)  
