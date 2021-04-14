@@ -29,7 +29,7 @@ iOS에서 대화내용을 내보내기 하면, 여러개의 txt파일이 포함�
 - `race.mp4`
 - `dailyTMI.csv`
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/emSiK0Q_f6I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+https://www.youtube.com/embed/emSiK0Q_f6I
 
 ---
 ### rank.py
