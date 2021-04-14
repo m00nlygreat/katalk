@@ -12,21 +12,43 @@ people = set(data['person'])
 chart = pd.DataFrame(dates).rename(columns={0:'date'}).set_index(['date'])
 
 for person in people:
-    messages = []
+    # messages = []
+    days = []
     for date in dates:
         day_count = np.count_nonzero((data.loc[date,['person']]).values == person)
-        if len(messages) >= 7:
-            lastweek = sum([messages[-(i+1)] for i in range(6)])
-            if lastweek != 0:
-                messages.append(messages[-1]+day_count)
-            else:
-                messages.append(0)
+        days.append(day_count)
+    period = 30
+
+    sml_than_month = np.cumsum(days[:period])
+    big_than_month = []
+
+    for i in range(1,len(days)+1):
+        if i <= period:
+            continue
         else:
-            messages.append(messages[-1]+day_count if len(messages) >= 1 else day_count)
-    chart[person] = messages
+            big_than_month.append(np.sum(days[i-period:i]))
+    
+    person_data = np.append(sml_than_month, big_than_month)
+
+    
+        # day_count = np.count_nonzero((data.loc[date,['person']]).values == person)
+        # if len(messages) >= 3:
+        #     recent_two_days = [messages[-1], day_count ]
+        #     if len(set(recent_two_days)) == 1:
+        #         messages.append(0)
+        #     else:
+        #         messages.append(messages[-1]+day_count)
+        # else:
+        #     messages.append(messages[-1]+day_count if len(messages) >= 1 else day_count)
+    
+    chart[person] = person_data
 
 
 print(chart)
+chart.to_csv('dailyTMI.csv')
+title = '퇴근후 오버워치 2018.12 ~ 2021.4'
+
+
 # bar_chart_race 그리기
 
 import bar_chart_race as bcr
@@ -52,7 +74,7 @@ bcr.bar_chart_race(
     figsize=(5, 3),
     dpi=144,
     cmap='dark12',
-    title='TMI 순위',
+    title=title,
     title_size='',
     bar_label_size=7,
     tick_label_size=7,
