@@ -12,12 +12,21 @@ people = set(data['person'])
 chart = pd.DataFrame(dates).rename(columns={0:'date'}).set_index(['date'])
 
 for person in people:
-    messages_count = []
+    messages = []
     for date in dates:
-        messages_count_in_a_day = np.count_nonzero((data.loc[date,['person']]).values == person)
-        messages_count.append(messages_count_in_a_day)
-    chart[person] = messages_count
+        day_count = np.count_nonzero((data.loc[date,['person']]).values == person)
+        if len(messages) >= 7:
+            lastweek = sum([messages[-(i+1)] for i in range(6)])
+            if lastweek != 0:
+                messages.append(messages[-1]+day_count)
+            else:
+                messages.append(0)
+        else:
+            messages.append(messages[-1]+day_count if len(messages) >= 1 else day_count)
+    chart[person] = messages
 
+
+print(chart)
 # bar_chart_race 그리기
 
 import bar_chart_race as bcr
@@ -26,7 +35,7 @@ bcr.bar_chart_race(
     filename='race.mp4',
     orientation='h',
     sort='desc',
-    n_bars=6,
+    n_bars=10,
     fixed_order=False,
     fixed_max=True,
     steps_per_period=20,
