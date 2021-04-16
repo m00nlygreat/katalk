@@ -50,3 +50,15 @@ https://www.youtube.com/embed/emSiK0Q_f6I
 
 #### 아웃풋
 - `result.csv`
+
+---
+### mention.py
+
+단순히 어떤 말을 누가 가장 많이 했나, 순서대로 횟수와 함께 정렬합니다
+
+#### 인풋
+- `conversation.csv`
+- words에 배열 형태로 표현을 넣습니다. 한 줄에 여러번 배열 요소를 언급해도 1번만 카운트 됩니다.
+
+#### 아웃풋
+- `result.csv`
